@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ItemPedido } from './ItemPedido';
+import { Produto } from './Produto';
+import { Pedido } from './Pedido';
 
 @Injectable({
   providedIn: 'root'
@@ -21,9 +24,16 @@ export class ItensPedidoService {
   getItensPedidoByIdPedido(id: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/idPedido/${id}`);
   }
-
-  createItensPedido(itensPedido: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, itensPedido);
+  produto!: Produto;
+  pedido!: Pedido;
+  itemPedido!: ItemPedido;
+  createItensPedido(itensPedido: any, produto: any): Observable<any> {
+    this.itemPedido = {
+      quantidade: produto.quantidade,
+      pedido: {nomeCliente: itensPedido.nomeCliente, emailCliente: itensPedido.emailCliente, dataCriacao: new Date(), pago: true},
+      produto: {nomeProduto: produto.nomeProduto, valor: produto.valor}
+    }
+    return this.http.post<any>(this.apiUrl, this.itemPedido);
   }
 
   updateItensPedido(id: number, itensPedido: any): Observable<any> {
