@@ -20,9 +20,9 @@ export class PedidoComponent implements OnInit {
   ngOnInit(): void {
     this.carregarPedidos();
 
-    this.pedidoService.getPedidos().subscribe(data => {
-      this.pedidos = data;
-    });
+    // this.pedidoService.getPedidos().subscribe(data => {
+    //   this.pedidos = data;
+    // });
   }
 
   carregarPedidos(): void {

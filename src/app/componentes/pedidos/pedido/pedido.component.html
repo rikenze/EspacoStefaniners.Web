@@ -8,11 +8,4 @@
         <button (click)="pedidoDetalhes(pedido.id)">Ver detalhes</button>
       </li>
     </ul>
-
-  <ul>
-    <li *ngFor="let pedido of pedidos">
-      <h3>Pedido #{{ pedido.id }} - {{ pedido.nomeCliente }}</h3>
-      <button (click)="pedidoDetalhes(pedido.id)">Ver detalhes</button>
-    </li>
-  </ul>
 </div>
