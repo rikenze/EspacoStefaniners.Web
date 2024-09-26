@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  background-color: #f5deb3; /* Cor de cerveja clara */
+  color: #8b4513; /* Cor de cerveja escura */
+}
+
+button {
+  background-color: #d2b48c; /* Cor de cerveja */
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #c19a6b; /* Cor de cerveja mais escura */
+}

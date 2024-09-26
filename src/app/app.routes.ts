@@ -1,3 +1,31 @@
-import { Routes } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
+import { PedidoComponent } from './componentes/pedidos/pedido/pedido.component';
+import { ProdutoComponent } from './componentes/pedidos/produto/produto.component';
+import { NgModule } from '@angular/core';
+import { PedidoDetalhesComponent } from './componentes/pedidos/pedido-detalhes/pedido-detalhes.component';
 
-export const routes: Routes = [];
+export const routes: Routes = [
+  {
+    path: '',
+    redirectTo: 'pedido',
+    pathMatch: 'full'
+  },
+  {
+    path: 'pedido',
+    component: PedidoComponent
+  },
+  {
+    path: 'pedidoDetalhes/:id',
+    component: PedidoDetalhesComponent
+  },
+  {
+    path: 'produto',
+    component: ProdutoComponent
+  }
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }

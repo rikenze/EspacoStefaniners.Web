@@ -1,0 +1,48 @@
+<div class="cervejas-list">
+  <h2>Lista de Cervejas</h2>
+
+  <!-- Formulário para criar um novo pedido -->
+  <form [formGroup]="formulario" #pedidoForm="ngForm">
+    <div>
+      <label for="nomeCliente">Nome do Cliente:</label>
+      <input
+        type="text"
+        id="nomeCliente"
+        formControlName="nomeCliente"
+        required
+      />
+    </div>
+
+    <div>
+      <label for="emailCliente">Email do Cliente:</label>
+      <input
+        type="email"
+        id="emailCliente"
+        formControlName="emailCliente"
+        required
+      />
+    </div>
+
+    <ul>
+      <li *ngFor="let cerveja of cervejas">
+        <div class="cerveja-info"></div>
+        <h3>{{ cerveja.nomeProduto }}</h3>
+
+        <p>Preço: R$ {{ cerveja.valor | number: '1.2-2' }}</p>
+
+        <label for="quantidade-{{ cerveja.nomeProduto }}">Quantidade:</label>
+        <input
+          type="number"
+          formControlName="quantidade-{{ cerveja.nomeProduto }}"
+          min="1"
+          max="100"
+          required
+        />
+        <!-- <button type="button" (click)="adicionarCerveja()">Adicionar ao Pedido</button> -->
+        <button type="button" [disabled]="!pedidoForm.form.valid">Fazer pedido</button>
+      </li>
+    </ul>
+
+  </form>
+  <button (click)="pedidosPagina()">Voltar</button>
+</div>
