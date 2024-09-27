@@ -6,6 +6,17 @@
       <li *ngFor="let pedido of pedidos">
         <h3>Pedido #{{ pedido.id }} - {{ pedido.nomeCliente }}</h3>
         <button (click)="pedidoDetalhes(pedido.id)">Ver detalhes</button>
+        <button class="btnCancelar" (click)="abrirCancelarModal(pedido.id)">Cancelar</button>
       </li>
     </ul>
+</div>
+
+<div class="modal" *ngIf="isCancelarModalAberto">
+  <div class="modal-content">
+    <span class="close" (click)="fecharCancelarModal()">&times;</span>
+    <h2>Cancelar Pedido</h2>
+    <p>Você tem certeza que deseja cancelar o pedido #{{ pedidoIdSelecionado }}?</p>
+    <button class="btnCancelar" (click)="confirmarCancelamento()">Confirmar</button>
+    <button (click)="fecharCancelarModal()">Fechar</button>
+  </div>
 </div>

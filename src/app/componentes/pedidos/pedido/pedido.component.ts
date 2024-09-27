@@ -14,15 +14,13 @@ import { CommonModule } from '@angular/common';
 
 export class PedidoComponent implements OnInit {
   pedidos: any[] = [];
+  isCancelarModalAberto: boolean = false;
+  pedidoIdSelecionado: number | null = null;
 
   constructor(private pedidoService: PedidoService, private router: Router) {}
 
   ngOnInit(): void {
     this.carregarPedidos();
-
-    // this.pedidoService.getPedidos().subscribe(data => {
-    //   this.pedidos = data;
-    // });
   }
 
   carregarPedidos(): void {
@@ -37,5 +35,28 @@ export class PedidoComponent implements OnInit {
 
   produtosPagina(): void {
     this.router.navigate(['/produto']);
+  }
+
+  abrirCancelarModal(pedidoId: number): void {
+    this.pedidoIdSelecionado = pedidoId;
+    this.isCancelarModalAberto = true;
+  }
+
+  fecharCancelarModal(): void {
+    this.isCancelarModalAberto = false;
+    this.pedidoIdSelecionado = null;
+  }
+
+  confirmarCancelamento(): void {
+    if (this.pedidoIdSelecionado !== null) {
+      this.pedidoService.deletePedido(this.pedidoIdSelecionado).subscribe({
+        complete: () => {
+        // Atualizar a lista de pedidos após o cancelamento
+        this.pedidos = this.pedidos.filter(pedido => pedido.id !== this.pedidoIdSelecionado);
+        this.fecharCancelarModal();
+        },
+        error: (e) => console.error(e)}
+      );
+    }
   }
 }
