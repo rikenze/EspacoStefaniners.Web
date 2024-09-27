@@ -6,6 +6,7 @@
       <li *ngFor="let pedido of pedidos">
         <h3>Pedido #{{ pedido.id }} - {{ pedido.nomeCliente }}</h3>
         <button (click)="pedidoDetalhes(pedido.id)">Ver detalhes</button>
+        <button class="btnCancelar" [routerLink]="['/editarPedido', pedido.id]">Editar</button>
         <button class="btnCancelar" (click)="abrirCancelarModal(pedido.id)">Cancelar</button>
       </li>
     </ul>

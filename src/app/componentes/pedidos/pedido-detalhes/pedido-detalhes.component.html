@@ -1,15 +1,15 @@
-<div class="itens-pedido" *ngIf="pedidos">
-  <h2>Detalhes do Pedido #{{ pedidos.id }}</h2>
-  <p>Usuário: {{ pedidos.nomeCliente }}</p>
-  <p>Email do Cliente: {{ pedidos.emailCliente }}</p>
-  <p>Data da Criação: {{ pedidos.dataCriacao | date:'dd/MM/yyyy HH:mm' }}</p>
-  <p>Pago: {{ pedidos.pago ? 'Sim' : 'Não' }}</p>
+<div class="itens-pedido" *ngIf="pedido">
+  <h2>Detalhes do Pedido #{{ pedido.id }}</h2>
+  <p>Usuário: {{ pedido.nomeCliente }}</p>
+  <p>Email do Cliente: {{ pedido.emailCliente }}</p>
+  <p>Data da Criação: {{ pedido.dataCriacao | date:'dd/MM/yyyy HH:mm' }}</p>
+  <p>Pago: {{ pedido.pago ? 'Sim' : 'Não' }}</p>
 
   <h3>Itens do Pedido:</h3>
   <ul>
-    <li *ngIf="itensPedido === null">Nenhum item encontrado.</li>
+    <li *ngIf="itemPedido === null">Nenhum item encontrado.</li>
     <li>
-      Produto: {{ itensPedido.produto.nomeProduto }} - Quantidade: {{ itensPedido.quantidade }} - Valor: {{ itensPedido.produto.valor }}
+      Produto: {{ itemPedido.produto.nomeProduto }} - Quantidade: {{ itemPedido.quantidade }} - Valor: {{ itemPedido.produto.valor }}
     </li>
   </ul>
 

@@ -1,26 +1,28 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PedidoService } from '../pedido.service';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
 import { ItensPedidoService } from '../itens-pedido.service';
-import { catchError } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { catchError, of } from 'rxjs';
 import { Pedido } from '../Pedido';
 import { ItemPedido } from '../ItemPedido';
 
 @Component({
-  selector: 'app-pedido-detalhes',
+  selector: 'app-editar-pedido',
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule, CommonModule],
-  templateUrl: './pedido-detalhes.component.html',
-  styleUrls: ['./pedido-detalhes.component.css']
+  templateUrl: './editar-pedido.component.html',
+  styleUrl: './editar-pedido.component.css'
 })
-
-export class PedidoDetalhesComponent implements OnInit {
+export class EditarPedidoComponent implements OnInit {
   @Input() pedidoId!: number;
   pedido: Pedido | null = null;
-  itemPedido!: ItemPedido;
+  itemPedido: ItemPedido = {
+    pedido: {nomeCliente: '', emailCliente: '', pago: false, dataCriacao: new Date()},
+    produto: { nomeProduto: '', valor: 0 },
+    quantidade: 0
+  };
 
   constructor(
     private route: ActivatedRoute,
@@ -32,7 +34,7 @@ export class PedidoDetalhesComponent implements OnInit {
   ngOnInit(): void {
     const idParam = this.route.snapshot.paramMap.get('id');
     if (idParam) {
-      const id = +idParam;
+      const id = + idParam;
       this.pedidoService.getPedidoById(id).pipe(
         catchError(error => {
           console.error('Erro ao buscar pedido:', error);
@@ -52,6 +54,26 @@ export class PedidoDetalhesComponent implements OnInit {
       });
     } else {
       console.error('ID não encontrado na rota');
+    }
+  }
+
+  salvarPedido(){
+    if(this.pedido){
+      this.pedidoService.updatePedido(this.pedido!.id!, this.pedido!).subscribe(
+        response => {
+          console.log('Pedido atualizado com sucesso:', response);
+        },
+        error => {
+          console.error('Erro ao atualizar pedido:', error);
+        });
+
+      this.itensPedidoService.updateItensPedido(this.itemPedido.id!, this.itemPedido).subscribe(
+        response => {
+          console.log('Item atualizado com sucesso:', response);
+        },
+        error => {
+          console.error('Erro ao atualizar item:', error);
+        });
     }
   }
 

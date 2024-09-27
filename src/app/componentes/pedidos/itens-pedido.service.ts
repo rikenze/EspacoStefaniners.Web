@@ -36,7 +36,7 @@ export class ItensPedidoService {
     return this.http.post<any>(this.apiUrl, this.itemPedido);
   }
 
-  updateItensPedido(id: number, itensPedido: any): Observable<any> {
+  updateItensPedido(id: number, itensPedido: ItemPedido): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/${id}`, itensPedido);
   }
 

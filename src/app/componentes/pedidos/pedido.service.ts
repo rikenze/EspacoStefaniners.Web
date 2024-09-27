@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Pedido } from './Pedido';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class PedidoService {
     return this.http.post<any>(this.apiUrl, novoPedido);
   }
 
-  updatePedido(id: number, pedido: any): Observable<any> {
+  updatePedido(id: number, pedido: Pedido): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/${id}`, pedido);
   }
 

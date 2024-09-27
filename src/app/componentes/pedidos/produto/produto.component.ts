@@ -1,6 +1,4 @@
 import { Produto } from './../Produto';
-import { Pedido } from './../Pedido';
-import { ItemPedido } from './../ItemPedido';
 import { Component, OnInit } from '@angular/core';
 import { PedidoService } from '../pedido.service';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -17,8 +15,6 @@ import { ItensPedidoService } from '../itens-pedido.service';
 })
 
 export class ProdutoComponent implements OnInit {
-
-
   cervejas: Produto[] = [
     { nomeProduto: 'Skol', valor: 7.00, quantidade: 0 },
     { nomeProduto: 'Heineken', valor: 8.00, quantidade: 0 },
