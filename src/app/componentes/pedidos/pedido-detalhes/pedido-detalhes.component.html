@@ -7,9 +7,9 @@
 
   <h3>Itens do Pedido:</h3>
   <ul>
-    <li *ngIf="itemPedido === null">Nenhum item encontrado.</li>
+    <li *ngIf="itensPedido === null">Nenhum item encontrado.</li>
     <li>
-      Produto: {{ itemPedido.produto.nomeProduto }} - Quantidade: {{ itemPedido.quantidade }} - Valor: {{ itemPedido.produto.valor }}
+      Produto: {{ itensPedido.produto.nomeProduto }} - Quantidade: {{ itensPedido.quantidade }} - Valor: {{ itensPedido.produto.valor }}
     </li>
   </ul>
 

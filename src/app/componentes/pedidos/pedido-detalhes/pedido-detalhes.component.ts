@@ -20,7 +20,11 @@ import { ItemPedido } from '../ItemPedido';
 export class PedidoDetalhesComponent implements OnInit {
   @Input() pedidoId!: number;
   pedido: Pedido | null = null;
-  itemPedido!: ItemPedido;
+  itensPedido: ItemPedido = {
+    pedido: {nomeCliente: '', emailCliente: '', pago: false, dataCriacao: new Date()},
+    produto: { nomeProduto: '', valor: 0 },
+    quantidade: 0
+  };
 
   constructor(
     private route: ActivatedRoute,
@@ -48,7 +52,7 @@ export class PedidoDetalhesComponent implements OnInit {
           return of([]);
         })
       ).subscribe(data => {
-        this.itemPedido = data;
+        this.itensPedido = data;
       });
     } else {
       console.error('ID não encontrado na rota');

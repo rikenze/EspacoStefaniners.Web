@@ -10,8 +10,14 @@ import { Pedido } from './Pedido';
 })
 export class ItensPedidoService {
   private apiUrl = 'http://localhost:5070/itenspedido';
+  itemPedido!: ItemPedido;
+  itensPedido: ItemPedido[] = [];
 
   constructor(private http: HttpClient) {}
+
+  ngOnInit(){
+
+  }
 
   getItensPedidos(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
@@ -24,16 +30,22 @@ export class ItensPedidoService {
   getItensPedidoByIdPedido(id: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/idPedido/${id}`);
   }
-  produto!: Produto;
-  pedido!: Pedido;
-  itemPedido!: ItemPedido;
-  createItensPedido(itensPedido: any, produto: any): Observable<any> {
-    this.itemPedido = {
-      quantidade: produto.quantidade,
-      pedido: {nomeCliente: itensPedido.nomeCliente, emailCliente: itensPedido.emailCliente, dataCriacao: new Date(), pago: true},
-      produto: {nomeProduto: produto.nomeProduto, valor: produto.valor}
-    }
-    return this.http.post<any>(this.apiUrl, this.itemPedido);
+
+  createItensPedido(itensPedido: any, produtos: Produto[]): Observable<any> {
+    this.itensPedido = produtos.map(p => ({
+      quantidade: p.quantidade!,
+      pedido: {
+        nomeCliente: itensPedido.nomeCliente,
+        emailCliente: itensPedido.emailCliente,
+        dataCriacao: new Date(),
+        pago: true,
+      },
+      produto: {
+        nomeProduto: p.nomeProduto,
+        valor: p.valor,
+      },
+    }));
+    return this.http.post<any>(this.apiUrl, this.itensPedido);
   }
 
   updateItensPedido(id: number, itensPedido: ItemPedido): Observable<any> {

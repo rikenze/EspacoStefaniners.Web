@@ -50,28 +50,27 @@ export class ProdutoComponent implements OnInit {
 
   criarPedido(): void {
     if (this.formulario.valid) {
-      const produto = this.cervejas.map(cerveja => {
+      const produtos: Produto[] = this.cervejas.map(cerveja => {
         return {
           nomeProduto: cerveja.nomeProduto,
-          quantidade: this.formulario.get(cerveja.nomeProduto)?.value,
+          quantidade: this.formulario.get(cerveja.nomeProduto)?.value || 0,
           valor: cerveja.valor
         };
-      }).filter(x => x.quantidade > 0).find(x => true);
-      this.itensPedidoService.createItensPedido(this.formulario.value, produto).subscribe((pedidoCriado) => {
-      }, error => {
-        console.error('Erro ao criar pedido:', error);
+      }).filter(x => x.quantidade > 0);
+      console.log(produtos);
+      this.itensPedidoService.createItensPedido(this.formulario.value, produtos).subscribe({
+        next: () => {
+          console.log('Items adicionados com sucesso.');
+        },
+        error: (e) => {
+          console.error('Erro:', e);
+        },
       });
-    }
-  }
 
-  fazerPedido(): void {
-    if (this.formulario.valid) {
     }
   }
 
   pedidosPagina(): void {
     this.router.navigate(['/pedido']);
   }
-
-
 }
