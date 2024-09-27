@@ -64,13 +64,6 @@ export class ProdutoComponent implements OnInit {
     }
   }
 
-  incrementarQuantidade(nomeProduto: string): void {
-    const quantidadeControl = this.formulario.get(`quantidade.${nomeProduto}`);
-    if (quantidadeControl) {
-      quantidadeControl.setValue(quantidadeControl.value + 1);
-    }
-  }
-
   fazerPedido(): void {
     if (this.formulario.valid) {
     }

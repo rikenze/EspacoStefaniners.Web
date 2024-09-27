@@ -20,7 +20,6 @@
 
         <label for="quantidade-{{ cerveja.nomeProduto }}">Quantidade:</label>
         <input type="number" [formControlName]="cerveja.nomeProduto" min="0" max="100" required />
-        <button type="button" (click)="incrementarQuantidade(cerveja.nomeProduto)">Adicionar</button>
       </li>
     </ul>
 
