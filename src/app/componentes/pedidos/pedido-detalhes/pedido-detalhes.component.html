@@ -2,14 +2,13 @@
   <h2>Detalhes do Pedido #{{ pedido.id }}</h2>
   <p>Usuário: {{ pedido.nomeCliente }}</p>
   <p>Email do Cliente: {{ pedido.emailCliente }}</p>
-  <p>Data da Criação: {{ pedido.dataCriacao | date:'dd/MM/yyyy HH:mm' }}</p>
   <p>Pago: {{ pedido.pago ? 'Sim' : 'Não' }}</p>
-
+  <p>Valor total: {{ pedido.valorTotal }}</p>
   <h3>Itens do Pedido:</h3>
   <ul>
-    <li *ngIf="itensPedido === null">Nenhum item encontrado.</li>
-    <li>
-      Produto: {{ itensPedido.produto.nomeProduto }} - Quantidade: {{ itensPedido.quantidade }} - Valor: {{ itensPedido.produto.valor }}
+    <li *ngIf="pedido.itensPedido === null">Nenhum item encontrado.</li>
+    <li *ngFor="let item of pedido.itensPedido">
+      Produto: {{ item.nomeProduto }} - Quantidade: {{ item.quantidade }} - Valor: {{ item.valorUnitario }}
     </li>
   </ul>
 

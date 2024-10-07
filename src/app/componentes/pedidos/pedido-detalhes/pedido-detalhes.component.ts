@@ -7,7 +7,6 @@ import { ItensPedidoService } from '../itens-pedido.service';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { Pedido } from '../Pedido';
-import { ItemPedido } from '../ItemPedido';
 
 @Component({
   selector: 'app-pedido-detalhes',
@@ -20,11 +19,6 @@ import { ItemPedido } from '../ItemPedido';
 export class PedidoDetalhesComponent implements OnInit {
   @Input() pedidoId!: number;
   pedido: Pedido | null = null;
-  itensPedido: ItemPedido = {
-    pedido: {nomeCliente: '', emailCliente: '', pago: false, dataCriacao: new Date()},
-    produto: { nomeProduto: '', valor: 0 },
-    quantidade: 0
-  };
 
   constructor(
     private route: ActivatedRoute,
@@ -44,15 +38,6 @@ export class PedidoDetalhesComponent implements OnInit {
         })
       ).subscribe(data => {
         this.pedido = data;
-      });
-
-      this.itensPedidoService.getItensPedidoByIdPedido(id).pipe(
-        catchError(error => {
-          console.error('Erro ao buscar itens do pedido:', error);
-          return of([]);
-        })
-      ).subscribe(data => {
-        this.itensPedido = data;
       });
     } else {
       console.error('ID não encontrado na rota');

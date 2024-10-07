@@ -5,6 +5,8 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ItensPedidoService } from '../itens-pedido.service';
+import { CriarItemPedidoDTO } from '../DTO/CriarItemPedidoDTO';
+import { CriarPedidoDTO } from '../DTO/CriarPedidoDTO';
 
 @Component({
   selector: 'app-produto',
@@ -57,8 +59,17 @@ export class ProdutoComponent implements OnInit {
           valor: cerveja.valor
         };
       }).filter(x => x.quantidade > 0);
-      console.log(produtos);
-      this.itensPedidoService.createItensPedido(this.formulario.value, produtos).subscribe({
+
+      const pedidoDTO = new CriarPedidoDTO(
+        this.formulario.get('nomeCliente')?.value,
+        this.formulario.get('emailCliente')?.value,
+        true,
+        [
+          ...produtos.map((produtoDTO) => new CriarItemPedidoDTO(produtoDTO, produtoDTO.quantidade))
+        ]
+      );
+
+      this.pedidoService.createPedido(pedidoDTO).subscribe({
         next: () => {
           console.log('Items adicionados com sucesso.');
         },

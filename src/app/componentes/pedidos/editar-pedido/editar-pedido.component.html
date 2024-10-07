@@ -24,35 +24,30 @@
     </div>
 
     <div class="form-group">
-      <label>Data da Criação:</label>
-      <p>{{ pedido.dataCriacao | date:'dd/MM/yyyy HH:mm' }}</p>
-    </div>
-
-    <div class="form-group">
       <label>Pago:</label>
       <p>{{ pedido.pago ? 'Sim' : 'Não' }}</p>
     </div>
 
     <h3>Itens do Pedido:</h3>
     <ul>
-      <li *ngIf="itemPedido === null">Nenhum item encontrado.</li>
-      <li >
+      <li *ngIf="pedido.itensPedido === null">Nenhum item encontrado.</li>
+      <li *ngFor="let item of pedido.itensPedido">
         <div class="item-info">
           <label for="nomeProduto">Produto:</label>
           <input
             type="text"
-            id="nomeProduto"
-            [(ngModel)]="itemPedido.produto.nomeProduto"
-            name="nomeProduto"
+            id="nomeProduto-{{item.idProduto}}"
+            [(ngModel)]="item.nomeProduto"
+            name="nomeProduto-{{item.idProduto}}"
             required
           />
 
           <label for="quantidade">Quantidade:</label>
           <input
             type="number"
-            id="quantidade"
-            [(ngModel)]="itemPedido.quantidade"
-            name="quantidade"
+            id="quantidade-{{item.id}}"
+            [(ngModel)]="item.quantidade"
+            name="quantidade-{{item.idProduto}}"
             min="1"
             required
           />

@@ -32,20 +32,20 @@ export class ItensPedidoService {
   }
 
   createItensPedido(itensPedido: any, produtos: Produto[]): Observable<any> {
-    this.itensPedido = produtos.map(p => ({
-      quantidade: p.quantidade!,
-      pedido: {
-        nomeCliente: itensPedido.nomeCliente,
-        emailCliente: itensPedido.emailCliente,
-        dataCriacao: new Date(),
-        pago: true,
-      },
-      produto: {
-        nomeProduto: p.nomeProduto,
-        valor: p.valor,
-      },
-    }));
-    return this.http.post<any>(this.apiUrl, this.itensPedido);
+    // this.itensPedido = produtos.map(p => ({
+    //   quantidade: p.quantidade!,
+    //   pedido: {
+    //     nomeCliente: itensPedido.nomeCliente,
+    //     emailCliente: itensPedido.emailCliente,
+    //     dataCriacao: new Date(),
+    //     pago: true,
+    //   },
+    //   produto: {
+    //     nomeProduto: p.nomeProduto,
+    //     valor: p.valor,
+    //   },
+    // }));
+     return this.http.post<any>(this.apiUrl, this.itensPedido);
   }
 
   updateItensPedido(id: number, itensPedido: ItemPedido): Observable<any> {
