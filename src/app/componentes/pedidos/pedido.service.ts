@@ -2,7 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Pedido } from './Pedido';
-import { EditarPedidoDTO, EditarProdutoDTO, ItemPedidoDTO } from './DTO/editarPedidoDTO';
+import { EditarPedidoDTO } from './DTO/EditarPedidoDTO';
+import { ItemPedidoDTO } from "./DTO/ItemPedidoDTO";
+import { EditarProdutoDTO } from "./DTO/EditarProdutoDTO";
 import { CriarPedidoDTO } from './DTO/CriarPedidoDTO';
 
 @Injectable({
