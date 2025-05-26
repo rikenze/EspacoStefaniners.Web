@@ -19,7 +19,7 @@
         <p>Preço: R$ {{ cerveja.valor | number: '1.2-2' }}</p>
 
         <label for="quantidade-{{ cerveja.nomeProduto }}">Quantidade:</label>
-        <input type="number" [formControlName]="cerveja.nomeProduto" min="0" max="100" required />
+        <input id="quantidade-{{ cerveja.nomeProduto }}" type="number" [formControlName]="cerveja.nomeProduto" min="0" max="100" required />
       </li>
     </ul>
 
